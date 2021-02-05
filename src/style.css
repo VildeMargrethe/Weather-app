@@ -32,6 +32,10 @@ body {
   color: #eaecf9 !important;
 }
 
+.city-date-temp-list {
+  list-style-type: none;
+}
+
 .city {
   padding: 40px 0 0 0;
   font-size: 25px;
