@@ -35,12 +35,13 @@
                 />
               </div>
               <div class="col-3">
-                <input
+                <button
                   type="submit"
                   id="search-button"
-                  value="search"
-                  class="btn btn-primary w-100"
-                />
+                  class="fas fa-search-location btn btn-primary w-100"
+                >
+                  <i class="fas fa-search-location"></i>
+                </button>
               </div>
             </div>
           </form>
@@ -48,7 +49,6 @@
             <ul class="city-date-temp-list">
               <li>
                 <h2 class="city" id="city-name"></h2>
-                <span class="country"> </span>
               </li>
               <li class="today row">
                 <p id="date"></p>
@@ -56,62 +56,37 @@
               <li>
                 <p id="description"></p>
               </li>
-              <li>
-                <div class="row">
-                  <div class="col-6">
-                    <div class="clearfix weather-temperature">
-                      <img
-                        src=""
-                        alt="Clear"
-                        id="weather-icon"
-                        class="float-left"
-                      />
-                      <span class="temperature" id="temperature"></span>
-                      <span class="units">
-                        <a href="#" id="celsius-link" class="active"> °C </a>
-                        |
-                        <a href="#" id="fahrenheit-link">°F </a>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <p>Humidity: <span id="humidity"></span>%</p>
-              </li>
-              <li>
-                <p>Wind: <span id="wind"></span> km/h</p>
-              </li>
             </ul>
 
+            <div class="row">
+              <div class="col-6">
+                <div class="clearfix weather-temperature">
+                  <img
+                    src=""
+                    alt="Clear"
+                    id="weather-icon"
+                    class="float-left"
+                  />
+                  <span class="temperature" id="temperature"></span>
+                  <span class="units">
+                    <a href="#" id="celsius-link" class="active"> °C </a>
+                    | <a href="#" id="fahrenheit-link">°F </a>
+                  </span>
+                </div>
+              </div>
+              <div class="col-6">
+                <ul class="weather-info-list">
+                  <li>
+                    <p>Humidity: <span id="humidity"></span>%</p>
+                  </li>
+                  <li>
+                    <p>Wind: <span id="wind"></span> km/h</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <div class="day-card mx-auto mt-3 shadow p-3 mb-5">
-              <div class="day-overview row">
-                <div class="col-3">0-6</div>
-                <div class="col-3">6-12</div>
-                <div class="col-3">12-18</div>
-                <div class="col-3">18-24</div>
-              </div>
-              <div class="day-overview-icons row">
-                <div class="col-3">
-                  <i class="fas fa-cloud-rain"></i>
-                </div>
-                <div class="col-3">
-                  <i class="fas fa-cloud-rain"></i>
-                </div>
-                <div class="col-3">
-                  <i class="fas fa-cloud-rain"></i>
-                </div>
-                <div class="col-3">
-                  <i class="fas fa-cloud-rain"></i>
-                </div>
-              </div>
-
-              <div class="overview-temperature row">
-                <div class="col-3">17°C</div>
-                <div class="col-3">17°C</div>
-                <div class="col-3">17°C</div>
-                <div class="col-3">17°C</div>
-              </div>
+              <div class="row weather-forecast" id="weather-forecast"></div>
             </div>
           </div>
         </div>
