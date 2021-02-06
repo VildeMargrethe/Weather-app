@@ -30,19 +30,6 @@ function formateDate(date){
             let cityElement = document.querySelector("#city-name");
             cityElement.innerHTML = searchInput.value;
         }
-    
-        function convertToFahrenheit(event){
-            event.preventDefault();
-            let temperatureElement = document.querySelector("#temperature");
-           temperatureElement.innerHTML = 66;
-
-    }
-
-            function convertToCelsius(event){
-            event.preventDefault();
-            let temperatureElement = document.querySelector("#temperature");
-            temperatureElement.innerHTML = 19;
-    }
 
 // Update date
 let currentTime = new Date();
@@ -53,14 +40,6 @@ link.innerHTML = formateDate(currentTime);
 //let form = document.querySelector("#search-form");
 //form.addEventListener("submit", search);
    
-
-// unit converter challenge
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", convertToFahrenheit);
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", convertToCelsius);
-
 // Update city name and temperature when searching for a city
 
 function showCurrentLocationandWeather(response) {
@@ -82,10 +61,22 @@ function findLocation(position) {
 }
 
 function displayWeatherCondition(response) {
-  let temperature = Number(response.data.main.temp);
-  let roundedTemp = Math.round(temperature);
   let tempElement = document.querySelector("#temperature");
+  let descriptionElement = document.querySelector("#description");
+  let windElement = document.querySelector("#wind");
+  let humidityElement = document.querySelector("#humidity");
+  let weatherIconElement = document.querySelector("#weather-icon");
+
+  celsiusTemperature = Number(response.data.main.temp);
+  let roundedTemp = Math.round(celsiusTemperature);
+
   tempElement.innerHTML = `${roundedTemp}`;
+  descriptionElement.innerHTML = response.data.weather[0].description;
+  windElement.innerHTML = Math.round(response.data.wind.speed);
+  humidityElement.innerHTML = Math.round(response.data.main.humidity);
+  weatherIconElement.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  weatherIconElement.setAttribute("alt", response.data.weather[0].description);
+  console.log(response);
 }
 
 function updateCityAndWeatherWhenSearch(event) {
@@ -102,10 +93,29 @@ function displayWeatherBasedOnCity(city) {
     axios.get(apiUrl).then(displayWeatherCondition);
 }
 
+function displayFahrenheitTemperature(event){
+    event.preventDefault();
+    let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+    celsiusLink.classList.remove("active");
+    fahrenheitLink.classList.add("active");
+    let temperatureElement = document.querySelector("#temperature");
+    temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function displayCelsiusTemperature(event){
+    event.preventDefault();
+    celsiusLink.classList.add("active");
+    fahrenheitLink.classList.remove("active");
+    let temperatureElement = document.querySelector("#temperature");
+    temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
 // When click on "Current location" button
 function displayCurrentLocationandWeather(){
     navigator.geolocation.getCurrentPosition(findLocation);
 }
+
+let celsiusTemperature = null;
 
 // Default location and temperature when loading page
 displayWeatherBasedOnCity("Paris");
@@ -114,6 +124,8 @@ displayWeatherBasedOnCity("Paris");
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", updateCityAndWeatherWhenSearch);
 
-// Current location button
-let currentLocationButton = document.querySelector(".current-location-button");
-currentLocationButton.addEventListener("click", displayCurrentLocationandWeather);
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click",displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click",displayCelsiusTemperature);
