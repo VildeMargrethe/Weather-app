@@ -3,6 +3,10 @@ body {
   background-color: #eaecf9;
 }
 
+h4 {
+  font-size: 12px;
+}
+
 .city-date-temp-list {
   font-size: 18px;
   font-weight: 100;
@@ -42,12 +46,6 @@ body {
   height: 17px;
 }
 
-#search-button {
-  background-color: #bfc2e8;
-  border-color: #bfc2e8;
-  color: white;
-}
-
 .city-date-temp-list {
   list-style-type: none;
 }
@@ -79,39 +77,6 @@ body {
   font-size: 15px;
 }
 
-.h4 {
-  font-size: 12px;
-}
-
-#description {
-  padding-top: 14px;
-  font-size: 16px;
-}
-
-#temperature {
-  padding-top: 10px;
-}
-
-.weather-forecast-temperature {
-  font-size: 16px;
-}
-
-#celsius-link {
-  text-decoration: none;
-}
-
-#fahrenheit-link {
-  text-decoration: none;
-}
-
-.country {
-  font-size: 10px;
-}
-
-#today-date {
-  font-size: 12px;
-}
-
 .overview-icons {
   font-size: 40px;
   color: #b5daf9;
@@ -127,12 +92,6 @@ body {
   color: black;
 }
 
-.signature {
-  font-size: 10px;
-  color: grey;
-  text-align: center;
-}
-
 .weather-temperature .active {
   color: black;
   cursor: default;
@@ -140,4 +99,43 @@ body {
 
 .weather-temperature .active:hover {
   text-decoration: none;
+}
+
+.weather-forecast-temperature {
+  font-size: 14px;
+}
+
+.signature {
+  font-size: 10px;
+  color: grey;
+  text-align: center;
+  text-decoration: none;
+}
+
+#search-button {
+  background-color: #bfc2e8;
+  border-color: #bfc2e8;
+  color: white;
+}
+
+#description {
+  padding-top: 14px;
+  font-size: 16px;
+  font-style: italic;
+}
+
+#temperature {
+  padding-top: 10px;
+}
+
+#celsius-link {
+  text-decoration: none;
+}
+
+#fahrenheit-link {
+  text-decoration: none;
+}
+
+#today-date {
+  font-size: 12px;
 }

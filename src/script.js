@@ -1,63 +1,34 @@
 function formateDate(date){
-        let days = [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-        ];
+    let days = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+    ];
 
-        let day = days[date.getDay()];
+    let day = days[date.getDay()];
 
-        let hour = date.getHours();
-        if (hour < 10) {
-            hour = `0${hour}`;
-        }
+    let hour = date.getHours();
+    if (hour < 10) {
+        hour = `0${hour}`;
+    }
 
-        let minutes = date.getMinutes();
-        if (minutes < 10) {
-            minutes = `0${minutes}`;
-        }
+    let minutes = date.getMinutes();
+    if (minutes < 10) {
+        minutes = `0${minutes}`;
+    }
 
-        return `${day}, ${hour}:${minutes}`;
+    return `${day}, ${hour}:${minutes}`;
     }   
 
-        function search(event) {
-            event.preventDefault();
-            let searchInput = document.querySelector("#search-text-input");
-            let cityElement = document.querySelector("#city-name");
-            cityElement.innerHTML = searchInput.value;
-        }
-
-// Update date
-let currentTime = new Date();
-let link = document.querySelector("#date");
-link.innerHTML = formateDate(currentTime);
-
-// let user search for city
-//let form = document.querySelector("#search-form");
-//form.addEventListener("submit", search);
-   
-// Update city name and temperature when searching for a city
-
-function showCurrentLocationandWeather(response) {
-  let temperature = Number(response.data.main.temp);
-  let roundedTemp = Math.round(temperature);
-  let tempElement = document.querySelector("#temperature");
-  tempElement.innerHTML = `${roundedTemp}`;
-
-  let cityElement = document.querySelector("#city-name");
-  cityElement.innerHTML = response.data.name;
-}
-
-function findLocation(position) {
-  let apiKey = "f7f2f10d7d1c65f4aa2b4e518e688029";
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
-  axios.get(apiUrl).then(showCurrentLocationandWeather);
+function search(event) {
+    event.preventDefault();
+    let searchInput = document.querySelector("#search-text-input");
+    let cityElement = document.querySelector("#city-name");
+    cityElement.innerHTML = searchInput.value;
 }
 
 function displayWeatherCondition(response) {
@@ -82,7 +53,9 @@ function displayWeatherCondition(response) {
 function updateCityAndWeatherWhenSearch(event) {
     event.preventDefault();
     let inputCity = document.querySelector("#search-text-input").value;
-    displayWeatherBasedOnCity(inputCity);
+    if(inputCity.length > 0){
+        displayWeatherBasedOnCity(inputCity);
+    }
 }
 
 function formatHours(timestamp){
@@ -121,8 +94,8 @@ function displayWeatherForecast(response){
         <div class="weather-forecast-temperature">
             <strong>
             ${Math.round(forecast.main.temp_max)}°
-            </strong> | 
-            ${Math.round(forecast.main.temp_min)}°
+            </strong>
+            <span style= "font-size: 12px;">${Math.round(forecast.main.temp_min)}°</span>
         </div>
     </div>
     `;   
@@ -158,12 +131,12 @@ function displayCelsiusTemperature(event){
     temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
-// When click on "Current location" button
-function displayCurrentLocationandWeather(){
-    navigator.geolocation.getCurrentPosition(findLocation);
-}
-
 let celsiusTemperature = null;
+
+// Update date
+let currentTime = new Date();
+let link = document.querySelector("#date");
+link.innerHTML = formateDate(currentTime);
 
 // Default location and temperature when loading page
 displayWeatherBasedOnCity("Paris");
